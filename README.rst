@@ -7,6 +7,7 @@ Usage
 -----
 
 .. code-block:: bash
+
     ./replacer.py 'cantal'  # use default emojis
     ./replacer.py 'vagga' ':letter_space: ':paul:'
 
