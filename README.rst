@@ -1,15 +1,16 @@
 Emoji-writer
 ============
 
-Transforms your text into slack emoji image.
+Transforms your text into emoji image. The primary usage is to throw short words
+written in emoji to slack.
 
 Usage
 -----
 
 .. code-block:: bash
 
-    ./replacer.py 'cantal'  # use default emojis
-    ./replacer.py 'vagga' ':letter_space: ':paul:'
+    ./replacer.py 'Yay'  # use default emojis
+    ./replacer.py 'Yay' --fg '👍' --bg '◼'
 
 Notes
 -----
