@@ -1,6 +1,14 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
+# coding: utf-8
+from __future__ import unicode_literals
+
+import argparse
 import sys
 from alphabet import LATIN_ALPHA
+try:
+    reduce
+except NameError:
+    from functools import reduce
 
 
 def to_matrix(text):
@@ -12,7 +20,7 @@ def to_matrix(text):
     return flatten
 
 
-def to_emoji(matrix, bg=':awesome:', fg=':narkoman:'):
+def to_emoji(matrix, bg, fg):
     emojies = [
         map(lambda x: fg if x else bg, row)
         for row in matrix
@@ -20,15 +28,17 @@ def to_emoji(matrix, bg=':awesome:', fg=':narkoman:'):
     return '\n'.join([''.join(es) for es in emojies])
 
 
-def transform(text, bg=':awesome:', fg=':narkoman:'):
+def transform(text, bg, fg):
     return to_emoji(to_matrix(text.upper()), bg=bg, fg=fg)
 
 
 if __name__ == '__main__':
-    word = sys.argv[1]
-    bg = ':awesome:'
-    fg = ':narkoman:'
-    if len(sys.argv) == 4:
-        bg = sys.argv[2]
-        fg = sys.argv[3]
-    print(transform(word, bg=bg, fg=fg))
+    parser = argparse.ArgumentParser(description='Write text with emojis')
+    parser.add_argument('text', type=str,
+                        help='quoted text to write into emoji')
+    parser.add_argument('--fg', type=str, dest='fg', default='■',
+                        help='character or quoted text to use as foreground')
+    parser.add_argument('--bg', type=str, dest='bg', default='□',
+                        help='character or quoted text to use as background')
+    args = parser.parse_args()
+    print(transform(args.text, bg=args.bg, fg=args.fg))
